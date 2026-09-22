@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!--
+  ==========================================================================
+  바이브 카페 (Vibe Cafe) - index.html
+  작성 언어: 한국어 (ko)
+  문자 인코딩: UTF-8
+  설명: 바이브 카페 음료 주문서 및 엑셀(Excel) 저장 웹페이지
+  ==========================================================================
+-->
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>☕ 바이브 카페 - 주문서</title>
+    <meta name="description" content="오늘도 좋은 하루의 시작, 바이브 카페 온라인 주문서입니다. 음료를 주문하고 엑셀 파일로 간편하게 저장해보세요." />
+    <meta property="og:title" content="☕ 바이브 카페 - 주문서" />
+    <meta property="og:description" content="오늘도 좋은 하루의 시작, 바이브 카페 온라인 음료 주문서" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Inter font and OpenType ss03 support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 외부 분리 스타일시트 연결 (style.css) -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- 전체 중앙 정렬 최대 500px 너비 컨테이너 -->
+    <main class="container" id="mainContainer">
+      <!-- 주문서 카드 영역 -->
+      <section class="order-card" id="orderCard" aria-labelledby="cafeTitle">
+        <!-- 1. 페이지 상단 헤더 영역 -->
+        <header class="cafe-header" id="cafeHeader">
+          <h1 class="cafe-title" id="cafeTitle">☕ 바이브 카페</h1>
+          <p class="cafe-subtitle" id="cafeSubtitle">오늘도 좋은 하루의 시작</p>
+        </header>
+
+        <!-- 2. 주문서 작성 폼 -->
+        <form id="orderForm" autocomplete="on">
+          <!-- 항목 1. 이름 (필수 입력, placeholder: "홍길동") -->
+          <div class="form-group" id="group-name">
+            <label for="name" class="form-label" id="label-name">
+              이름 <span class="required-mark" aria-hidden="true">*</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="userName"
+              placeholder="홍길동"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <!-- 항목 2. 이메일 (placeholder: "hong@email.com") -->
+          <div class="form-group" id="group-email">
+            <label for="email" class="form-label" id="label-email">이메일</label>
+            <input
+              type="email"
+              id="email"
+              name="userEmail"
+              placeholder="hong@email.com"
+            />
+          </div>
+
+          <!-- 항목 3. 전화번호 (placeholder: "010-1234-5678") -->
+          <div class="form-group" id="group-phone">
+            <label for="phone" class="form-label" id="label-phone">전화번호</label>
+            <input
+              type="tel"
+              id="phone"
+              name="userPhone"
+              placeholder="015-1234-5678"
+            />
+          </div>
+
+          <!-- 항목 4. 음료 선택 (드롭다운) -->
+          <div class="form-group" id="group-drink">
+            <label for="drink" class="form-label" id="label-drink">
+              음료 선택 <span class="required-mark" aria-hidden="true">*</span>
+            </label>
+            <select id="drink" name="drink" required aria-required="true">
+              <option value="" disabled selected>선택하세요</option>
+              <optgroup label="에스프레소 & 커피">
+                <option value="아메리카노">아메리카노</option>
+                <option value="카페라떼">카페라떼</option>
+                <option value="카페모카">카페모카</option>
+                <option value="바닐라라떼">바닐라라떼</option>
+                <option value="카라멜 마키아또">카라멜 마키아또</option>
+                <option value="콜드브루">콜드브루</option>
+                <option value="연유 라떼 (돌체)">연유 라떼 (돌체)</option>
+              </optgroup>
+              <optgroup label="논커피 라떼 & 티">
+                <option value="녹차라떼">녹차라떼</option>
+                <option value="초코라떼">초코라떼</option>
+                <option value="밀크티">얼그레이 밀크티</option>
+                <option value="자몽 허니 블랙티">자몽 허니 블랙티</option>
+              </optgroup>
+              <optgroup label="에이드 & 스무디">
+                <option value="레몬에이드">상큼 레몬에이드</option>
+                <option value="딸기 요거트 스무디">딸기 요거트 스무디</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- 항목 5. 사이즈 (라디오 버튼, 가로 배치) -->
+          <div class="form-group" id="group-size">
+            <span class="form-label" id="label-size-title">사이즈</span>
+            <div class="radio-group" role="radiogroup" aria-labelledby="label-size-title">
+              <!-- S (작은) -->
+              <label for="size-s" class="choice-item" id="label-size-s">
+                <input
+                  type="radio"
+                  id="size-s"
+                  name="size"
+                  value="S (작은)"
+                />
+                S(작은)
+              </label>
+
+              <!-- M (보통, 기본 선택) -->
+              <label for="size-m" class="choice-item" id="label-size-m">
+                <input
+                  type="radio"
+                  id="size-m"
+                  name="size"
+                  value="M (보통)"
+                  checked
+                />
+                M(보통, 기본 선택)
+              </label>
+
+              <!-- L (큰) -->
+              <label for="size-l" class="choice-item" id="label-size-l">
+                <input
+                  type="radio"
+                  id="size-l"
+                  name="size"
+                  value="L (큰)"
+                />
+                L(큰)
+              </label>
+            </div>
+          </div>
+
+          <!-- 항목 6. 추가 옵션 (체크박스, 가로 배치) -->
+          <div class="form-group" id="group-options">
+            <span class="form-label" id="label-options-title">추가 옵션</span>
+            <div class="checkbox-group" aria-labelledby="label-options-title">
+              <!-- 샷 추가(+500원) -->
+              <label for="opt-shot" class="choice-item" id="label-opt-shot">
+                <input
+                  type="checkbox"
+                  id="opt-shot"
+                  name="option"
+                  value="샷 추가(+500원)"
+                />
+                샷 추가(+500원)
+              </label>
+
+              <!-- 크림 추가(+500원) -->
+              <label for="opt-cream" class="choice-item" id="label-opt-cream">
+                <input
+                  type="checkbox"
+                  id="opt-cream"
+                  name="option"
+                  value="크림 추가(+500원)"
+                />
+                크림 추가(+500원)
+              </label>
+
+              <!-- 시럽 추가(+300원) -->
+              <label for="opt-syrup" class="choice-item" id="label-opt-syrup">
+                <input
+                  type="checkbox"
+                  id="opt-syrup"
+                  name="option"
+                  value="시럽 추가(+300원)"
+                />
+                시럽 추가(+300원)
+              </label>
+
+              <!-- 디카페인(+0원) -->
+              <label for="opt-decaf" class="choice-item" id="label-opt-decaf">
+                <input
+                  type="checkbox"
+                  id="opt-decaf"
+                  name="option"
+                  value="디카페인(+0원)"
+                />
+                디카페인(+0원)
+              </label>
+            </div>
+          </div>
+
+          <!-- 항목 7. 요청사항 (textarea, 4줄 높이, placeholder: "얼음 적게, 연하게 등") -->
+          <div class="form-group" id="group-request">
+            <label for="request" class="form-label" id="label-request">요청사항</label>
+            <textarea
+              id="request"
+              name="userRequest"
+              rows="4"
+              placeholder="얼음 적게, 연하게 등"
+            ></textarea>
+          </div>
+
+          <!-- 버튼 그룹: 주문하기 및 다시 작성 -->
+          <div class="button-group" id="buttonGroup">
+            <!-- 항목 8. 주문하기 버튼 (갈색 배경, 흰색 글씨, hover시 색상 변화) -->
+            <button type="submit" id="btn-submit" class="btn btn-order">
+              ☕ 주문하기
+            </button>
+            <!-- 항목 9. 다시 작성 버튼 (회색 배경) -->
+            <button type="reset" id="btn-reset" class="btn btn-reset">
+              다시 작성
+            </button>
+          </div>
+        </form>
+
+        <!-- 주문 완료 알림 및 주문 결과 확인 버튼 영역 -->
+        <div class="alert-box" id="alertBox" role="alert" aria-live="polite">
+          <div class="alert-content">
+            <strong>✅ 주문이 정상적으로 완료되었습니다!</strong>
+            <p id="alertMessage">아래 '주문 결과 확인' 버튼을 눌러 상세 내역을 바로 확인하실 수 있습니다.</p>
+          </div>
+          <button type="button" id="btn-view-result" class="btn btn-view-result">
+            🔍 주문 결과 확인하기
+          </button>
+        </div>
+      </section>
+
+      <!-- 누적 주문 접수 현황 섹션 -->
+      <section class="history-section" id="historySection" aria-labelledby="historyHeading">
+        <div class="history-header">
+          <h2 class="history-title" id="historyHeading">
+            📋 주문 접수 내역 <span class="history-badge" id="historyCount">0건</span>
+          </h2>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <!-- 엑셀 다운로드 버튼 -->
+            <button type="button" class="btn-download-excel" id="btnDownloadExcel" style="display: none;">
+              📥 엑셀 다운로드
+            </button>
+            <!-- 최근 주문 결과 보기 버튼 -->
+            <button type="button" class="btn-check-latest" id="btnCheckLatest" style="display: none;">
+              🔍 최근 주문 결과 보기
+            </button>
+            <!-- 주문 목록 초기화 버튼 -->
+            <button type="button" class="btn-clear" id="btnClearHistory" style="display: none;">
+              내역 비우기
+            </button>
+          </div>
+        </div>
+
+        <!-- 주문 목록 -->
+        <ul class="history-list" id="historyList">
+          <li class="empty-history">아직 접수된 주문이 없습니다.</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- [내역 비우기 확인 커스텀 모달] -->
+    <div class="modal-backdrop" id="confirmModal" aria-hidden="true" role="dialog" aria-labelledby="confirmTitle">
+      <div class="modal-card modal-confirm-card">
+        <div style="text-align: center; margin-bottom: 12px;">
+          <div style="font-size: 32px; margin-bottom: 8px;">🗑️</div>
+          <h3 style="font-family: var(--font-spotify-title); font-size: 19px; color: var(--spotify-white); font-weight: 700;" id="confirmTitle">주문 내역 비우기</h3>
+          <p style="font-size: 13.5px; color: var(--spotify-silver); margin-top: 6px; line-height: 1.5;">
+            저장된 모든 주문 내역을 삭제하시겠습니까?<br />삭제 후에는 복구할 수 없습니다.
+          </p>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+          <button type="button" class="btn btn-reset" id="btnCancelClear" style="flex: 1; padding: 11px 18px; font-size: 13px;">
+            취소
+          </button>
+          <button type="button" class="btn btn-order" id="btnConfirmClear" style="flex: 1; padding: 11px 18px; font-size: 13px; background-color: var(--spotify-negative-red); color: #ffffff;">
+            삭제하기
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- [주문 결과 확인 영수증 모달 팝업] -->
+    <div class="modal-backdrop" id="resultModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <div class="receipt-header">
+          <div class="receipt-icon">☕</div>
+          <h3 class="receipt-title" id="modalTitle">바이브 카페 주문 영수증</h3>
+          <p class="receipt-subtitle">주문이 성공적으로 접수되었습니다</p>
+        </div>
+
+        <div class="receipt-body">
+          <div class="receipt-row">
+            <span class="receipt-label">주문 번호</span>
+            <span class="receipt-value" id="resOrderId">-</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">주문 일시</span>
+            <span class="receipt-value" id="resOrderTime">-</span>
+          </div>
+          <div class="receipt-divider"></div>
+          <div class="receipt-row">
+            <span class="receipt-label">주문자명</span>
+            <span class="receipt-value highlight" id="resUserName">-</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">연락처</span>
+            <span class="receipt-value" id="resUserPhone">-</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">이메일</span>
+            <span class="receipt-value" id="resUserEmail">-</span>
+          </div>
+          <div class="receipt-divider"></div>
+          <div class="receipt-row">
+            <span class="receipt-label">주문 음료</span>
+            <span class="receipt-value highlight" id="resDrink">-</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">사이즈</span>
+            <span class="receipt-value" id="resSize">-</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">추가 옵션</span>
+            <span class="receipt-value" id="resOptions">-</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">요청사항</span>
+            <span class="receipt-value" id="resRequest">-</span>
+          </div>
+        </div>
+
+        <div class="receipt-footer">
+          <p class="receipt-notice">맛있고 정성스럽게 준비해 드리겠습니다. 감사합니다!</p>
+          <div style="display: flex; gap: 10px; margin-bottom: 8px;">
+            <button type="button" class="btn btn-order" id="btnDownloadSingleExcel" style="flex: 1; padding: 12px 16px; font-size: 13.5px; text-transform: none; letter-spacing: normal;">
+              📥 이 주문 엑셀 저장
+            </button>
+            <button type="button" class="btn btn-close-modal" id="btnCloseModal" style="flex: 1; margin: 0;">
+              닫기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 분리된 자바스크립트 로직 연결 (script.js) -->
+    <script src="./script.js"></script>
+  </body>
+</html>

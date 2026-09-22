@@ -1,0 +1,705 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   바이브 카페 (Vibe Cafe) - style.css
+   디자인 시스템: Spotify Dark Immersive Design System
+   - Backgrounds: Near Black (#121212)
+   - Surfaces: Dark Surface (#181818), Mid Dark (#1f1f1f), Dark Card (#252525)
+   - Accent: Spotify Green (#1ed760) / Hover (#1fdf64, #169c46)
+   - Texts: White (#ffffff), Silver (#b3b3b3), Near White (#cbcbcb)
+   - Semantic: Negative Red (#f3727f), Warning Orange (#ffa42b)
+   - Geometry: Pill Buttons (500px - 9999px), Circular Controls (50%)
+   - Typography: SpotifyMixUI / CircularSp Fallback, Uppercase with Tracking
+   - Shadows: Heavy Level 3 (rgba(0,0,0,0.5) 0px 8px 24px), Inset borders
+   ========================================================================== */
+
+/* --- 1. 기본 스타일 및 테마 변수 --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Spotify Colors */
+  --spotify-black: #121212;
+  --spotify-surface: #181818;
+  --spotify-mid-dark: #1f1f1f;
+  --spotify-card: #252525;
+  --spotify-card-hover: #2a2a2a;
+  --spotify-green: #1ed760;
+  --spotify-green-hover: #1fdf64;
+  --spotify-green-border: #1db954;
+  --spotify-white: #ffffff;
+  --spotify-silver: #b3b3b3;
+  --spotify-near-white: #cbcbcb;
+  --spotify-border-gray: #4d4d4d;
+  --spotify-light-border: #7c7c7c;
+  --spotify-negative-red: #f3727f;
+
+  /* Typography Stack */
+  --font-spotify: "SpotifyMixUI", "CircularSp", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-spotify-title: "SpotifyMixUITitle", "CircularSp", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Geometry */
+  --radius-subtle: 4px;
+  --radius-card: 8px;
+  --radius-pill: 500px;
+  --radius-full-pill: 9999px;
+  --radius-circle: 50%;
+
+  /* Spotify Shadows */
+  --shadow-heavy: 0px 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-medium: 0px 8px 8px rgba(0, 0, 0, 0.3);
+  --shadow-inset-input: rgb(18, 18, 18) 0px 1px 0px, rgb(124, 124, 124) 0px 0px 0px 1px inset;
+  --shadow-inset-input-focus: rgb(18, 18, 18) 0px 1px 0px, #ffffff 0px 0px 0px 1.5px inset;
+}
+
+body {
+  background-color: var(--spotify-black);
+  color: var(--spotify-white);
+  font-family: var(--font-spotify);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 40px 16px;
+  min-height: 100vh;
+}
+
+/* --- 2. 컨테이너 --- */
+.container {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* --- 3. 메인 주문 카드 (#181818 Elevated Dark Surface) --- */
+.order-card {
+  background-color: var(--spotify-surface);
+  border-radius: var(--radius-card);
+  padding: 32px 28px;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+/* --- 4. 페이지 상단 헤더 --- */
+.cafe-header {
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 스포티파이 그린 상단 알약 뱃지 */
+.cafe-header::before {
+  content: "NOW ROASTING • VIBE CAFE";
+  display: inline-block;
+  background-color: var(--spotify-mid-dark);
+  color: var(--spotify-green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: var(--radius-full-pill);
+  border: 1px solid rgba(30, 215, 96, 0.3);
+  margin-bottom: 14px;
+}
+
+.cafe-title {
+  font-family: var(--font-spotify-title);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.4px;
+  color: var(--spotify-white);
+  margin-bottom: 6px;
+}
+
+.cafe-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--spotify-silver);
+}
+
+/* --- 5. 폼 그룹 --- */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.required-mark {
+  color: var(--spotify-green);
+  margin-left: 2px;
+  font-weight: bold;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--spotify-white);
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+/* --- 6. 입력창 (Spotify Pill & Inset Combo) --- */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: var(--spotify-mid-dark);
+  color: var(--spotify-white);
+  border: none;
+  box-shadow: var(--shadow-inset-input);
+  border-radius: var(--radius-pill); /* 500px Spotify Input Radius */
+  font-family: var(--font-spotify);
+  font-size: 14.5px;
+  font-weight: 400;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+textarea {
+  border-radius: 12px;
+  resize: vertical;
+  min-height: 90px;
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder,
+textarea::placeholder {
+  color: #757575;
+  font-size: 14px;
+}
+
+/* 인풋 포커스 상태: 화이트 인셋 하이라이트 */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+  box-shadow: var(--shadow-inset-input-focus);
+}
+
+select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+select option,
+select optgroup {
+  background-color: var(--spotify-mid-dark);
+  color: var(--spotify-white);
+}
+
+/* --- 7. 사이즈 및 옵션 선택 그리드 (Pill Chips) --- */
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.choice-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background-color: var(--spotify-mid-dark);
+  border: 1px solid var(--spotify-border-gray);
+  border-radius: var(--radius-full-pill);
+  padding: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--spotify-silver);
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.choice-item:hover {
+  background-color: var(--spotify-card-hover);
+  color: var(--spotify-white);
+  border-color: var(--spotify-light-border);
+}
+
+/* 선택되었을 때의 상태: Spotify Green 테두리 & 밝은 텍스트 */
+.choice-item:has(input:checked) {
+  background-color: #262626;
+  border-color: var(--spotify-green);
+  color: var(--spotify-white);
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(30, 215, 96, 0.2);
+}
+
+.choice-item input[type="radio"],
+.choice-item input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: var(--spotify-green);
+  cursor: pointer;
+}
+
+/* --- 8. 버튼 시스템 (Spotify Pill Geometry) --- */
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  border-radius: var(--radius-full-pill);
+  padding: 13px 28px;
+  font-family: var(--font-spotify);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  border: none;
+}
+
+/* 메인 CTA: Spotify Green Pill Button */
+.btn-order {
+  flex: 1.6;
+  background-color: var(--spotify-green);
+  color: #000000;
+}
+
+.btn-order:hover {
+  background-color: var(--spotify-green-hover);
+  transform: scale(1.02);
+  box-shadow: 0 4px 16px rgba(30, 215, 96, 0.35);
+}
+
+.btn-order:active {
+  transform: scale(0.98);
+  background-color: #1aa34a;
+}
+
+/* 보조 액션: Outlined / Mid Dark Pill Button */
+.btn-reset {
+  flex: 1;
+  background-color: transparent;
+  color: var(--spotify-white);
+  border: 1px solid var(--spotify-light-border);
+}
+
+.btn-reset:hover {
+  border-color: var(--spotify-white);
+  transform: scale(1.02);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.btn-reset:active {
+  transform: scale(0.98);
+}
+
+/* --- 9. 주문 완료 알림창 --- */
+.alert-box {
+  display: none;
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: var(--radius-card);
+  background-color: var(--spotify-card);
+  border: 1px solid rgba(30, 215, 96, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 0.25s ease-out;
+}
+
+.alert-box.active {
+  display: block;
+}
+
+.alert-content strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--spotify-green);
+  margin-bottom: 6px;
+}
+
+.alert-content p {
+  color: var(--spotify-silver);
+  font-size: 13.5px;
+  margin-bottom: 16px;
+}
+
+/* 결과 확인 버튼: 화이트 필 */
+.btn-view-result {
+  width: 100%;
+  background-color: var(--spotify-white);
+  color: #000000;
+  border-radius: var(--radius-full-pill);
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.btn-view-result:hover {
+  transform: scale(1.02);
+  background-color: #f0f0f0;
+}
+
+/* --- 10. 누적 주문 접수 현황 섹션 --- */
+.history-section {
+  margin-top: 24px;
+  background-color: var(--spotify-surface);
+  border-radius: var(--radius-card);
+  padding: 26px 24px;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.history-title {
+  font-family: var(--font-spotify-title);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--spotify-white);
+  display: flex;
+  align-items: center;
+}
+
+.history-badge {
+  background-color: var(--spotify-green);
+  color: #000000;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: var(--radius-full-pill);
+  margin-left: 8px;
+}
+
+/* 엑셀 다운로드 버튼 (스포티파이 그린 서브 액션) */
+.btn-download-excel {
+  background-color: rgba(30, 215, 96, 0.15);
+  color: var(--spotify-green);
+  border: 1px solid rgba(30, 215, 96, 0.4);
+  border-radius: var(--radius-full-pill);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 7px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-download-excel:hover {
+  background-color: var(--spotify-green);
+  color: #000000;
+  border-color: var(--spotify-green);
+  transform: scale(1.02);
+  box-shadow: 0 2px 12px rgba(30, 215, 96, 0.3);
+}
+
+/* 최근 주문 결과 보기 버튼 */
+.btn-check-latest {
+  background-color: var(--spotify-mid-dark);
+  color: var(--spotify-white);
+  border: 1px solid var(--spotify-border-gray);
+  border-radius: var(--radius-full-pill);
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 7px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-check-latest:hover {
+  border-color: var(--spotify-white);
+  transform: scale(1.02);
+}
+
+/* 내역 비우기 버튼 */
+.btn-clear {
+  background-color: transparent;
+  color: var(--spotify-silver);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full-pill);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-clear:hover {
+  color: var(--spotify-negative-red);
+  border-color: var(--spotify-negative-red);
+  background-color: rgba(243, 114, 127, 0.1);
+}
+
+/* 주문 리스트 */
+.history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* 스크롤바 다크 스타일 */
+.history-list::-webkit-scrollbar {
+  width: 6px;
+}
+.history-list::-webkit-scrollbar-thumb {
+  background: var(--spotify-border-gray);
+  border-radius: 3px;
+}
+
+.history-item {
+  background-color: var(--spotify-mid-dark);
+  border-radius: 6px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.history-item:hover {
+  background-color: var(--spotify-card-hover);
+  border-color: var(--spotify-light-border);
+  transform: translateY(-1px);
+}
+
+.history-item-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  color: var(--spotify-white);
+  font-weight: 700;
+}
+
+.history-item-desc {
+  color: var(--spotify-silver);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.empty-history {
+  text-align: center;
+  color: var(--spotify-silver);
+  padding: 24px 0;
+  font-size: 14px;
+}
+
+/* --- 11. 모달 팝업 (Spotify Level 3 Heavy Elevation) --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background-color: var(--spotify-card);
+  width: 100%;
+  max-width: 440px;
+  border-radius: var(--radius-card);
+  padding: 30px 26px;
+  box-shadow: var(--shadow-heavy);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateY(14px);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-confirm-card {
+  max-width: 360px;
+  padding: 26px 22px;
+}
+
+.modal-backdrop.active .modal-card {
+  transform: translateY(0);
+}
+
+/* 영수증 헤더 */
+.receipt-header {
+  text-align: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.receipt-icon {
+  font-size: 32px;
+  margin-bottom: 4px;
+}
+
+.receipt-title {
+  font-family: var(--font-spotify-title);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--spotify-white);
+  letter-spacing: -0.2px;
+}
+
+.receipt-subtitle {
+  font-size: 13px;
+  color: var(--spotify-silver);
+  margin-top: 4px;
+}
+
+/* 영수증 본문 */
+.receipt-body {
+  padding: 18px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13.5px;
+}
+
+.receipt-label {
+  color: var(--spotify-silver);
+  font-weight: 400;
+  min-width: 72px;
+}
+
+.receipt-value {
+  color: var(--spotify-white);
+  text-align: right;
+  word-break: break-all;
+  font-weight: 400;
+}
+
+.receipt-value.highlight {
+  font-weight: 700;
+  color: var(--spotify-green);
+  font-size: 14.5px;
+}
+
+.receipt-divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  margin: 4px 0;
+}
+
+/* 영수증 푸터 */
+.receipt-footer {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.receipt-notice {
+  font-size: 12.5px;
+  color: var(--spotify-silver);
+  margin-bottom: 18px;
+}
+
+.btn-close-modal {
+  width: 100%;
+  background-color: var(--spotify-white);
+  color: #000000;
+  border-radius: var(--radius-full-pill);
+  padding: 13px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-close-modal:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.02);
+}
+
+/* --- 12. 애니메이션 --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- 13. 반응형 (모바일 뷰포트) --- */
+@media (max-width: 480px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .order-card,
+  .history-section {
+    padding: 24px 18px;
+  }
+
+  .cafe-title {
+    font-size: 22px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .choice-item {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
+
+  .history-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
